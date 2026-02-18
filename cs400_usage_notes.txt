@@ -1,0 +1,14 @@
+Download junit:
+	wget https://pages.cs.wisc.edu/~cs400/junit5.jar
+
+javac -cp junit5.jar:. toBeCompiled.java
+
+in file:
+	import org.junit.jupiter.api.Test;
+	
+	@Test
+	above the method to be tested
+
+java -jar junit5.jar -cp . -c classToBeTested
+
+function assumed to be passing if no exceptions were thrown.
