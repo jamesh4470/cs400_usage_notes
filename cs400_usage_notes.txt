@@ -2,6 +2,7 @@ Download junit:
 	wget https://pages.cs.wisc.edu/~cs400/junit5.jar
 
 javac -cp junit5.jar:. toBeCompiled.java
+java -jar junit5.jar -cp . -c classToBeTested
 
 in file:
 	import org.junit.jupiter.api.Test;
@@ -9,6 +10,63 @@ in file:
 	@Test
 	above the method to be tested
 
-java -jar junit5.jar -cp . -c classToBeTested
 
 function assumed to be passing if no exceptions were thrown.
+
+throws exception if unsatisfactory:
+    Assertions.assertEquals(x, true);
+    Assertions.assertTrue(x);
+    Assertions.assertFalse(x);
+
+Assertions.fail("error message");
+
+==========================================================================================================================
+
+git init
+
+git add file (adds to staging)
+git commit
+git commit -a (-a stands for add, automatically add files already tracked by git to staging)
+git commit -m "message"
+
+git status
+git log (shows commit history)
+
+.gitignore:
+    write one pattern per line
+    *.class (means ignore everything with .class extension)
+    ignores the file, preventing staging
+
+git restore (to unstage files)
+
+git checkout [commit id] (to switch to older commit, no main branch)
+git checkout [branch name]
+
+git clone (gets remote repository and creates local repository)
+git remote -v (-v is verbose, tells you information about the remote repository)
+
+git push (push local repository to remote)
+(git push will fail if remote is ahead of local)
+
+git pull (update local to catch up to remote)
+(if you already have commits also on the main branch, to reconcile:
+    git merge:
+        git config pull.rebase false
+        git pull
+
+        (git attempts to join changes automatically, as long as the changes are on different lines)
+
+        git push (to push merge to remote)
+)
+
+(better way to handle multidevelopment: branches)
+
+git branch frontend (creates new branch)
+git branch (shows all branches)
+git checkout frontend
+git push --set upstream origin frontend (pushes the branch and the changes you've made onto the remote)
+
+git merge frontend (do it while on main branch to merge)
+
+if you've fixed a merge conflict, commit your modified file to successfully merge
+remember to git push your merge onto remote
