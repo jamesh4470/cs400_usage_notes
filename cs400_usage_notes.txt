@@ -70,3 +70,32 @@ git merge frontend (do it while on main branch to merge)
 
 if you've fixed a merge conflict, commit your modified file to successfully merge
 remember to git push your merge onto remote
+
+==========================================================================================================================
+
+Makefile
+
+[rule_name]: [dependency_rule_to_run_first] 
+	[command]
+
+[rule_name]: [file_name] 
+	[command]
+
+specifying the file name as dependency makes sure the file exists in the first place, and that the file dependency has been updated before executing the rule.
+running the make command without a rule name will run the default (first) rule
+
+Example:
+
+
+run: ClassA.class ClassB.class
+	java ClassA
+	java ClassB
+	
+ClassB.class: ClassB.java
+	javac ClassB.java
+
+ClassA.class: ClassA.java
+	javac ClassA.java
+	
+Since run has dependencies ClassA.class and ClassB.class, it will make sure these files exist before running.
+If they don't exist, it will call their rules to make those files. 
