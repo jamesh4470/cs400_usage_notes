@@ -110,23 +110,35 @@ If they don't exist, it will call their rules to make those files.
 		// same as <meta name="name of the attribute" content="attribute content" />, has a self closing tag
 
         <style>
-            color: red // global style attributes
+            h2 { // applies to all h2
+				color: red
+			}
+			
+			#uniqueID {
+				color: green
+			}
+			
+			.customClass {
+				color: blue
+			}
         </style>
+		
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	
 	<body>
 		<h1>HEADER THAT SHOWS UP ON THE BROWSER</h1>
 		
-		<p>P stands for paragraph, smaller than headers</p>
+		<p id="uniqueID">P stands for paragraph, smaller than headers</p>
 		
 		<img src="image directory" width="300" /> // 300 pixels wide
 		
 		<h2 style="color: red; font-family: comic-sans; font-weight: normal; border-style: solid; border_color: purple; border-width: thick; background-color: lightblue">smaller heading</h2>
 		
 		<ul>
-			<li>this is a list item</li>
+			<li class="customClass">this is a list item</li>
 			<li>UL stands for unordered list</li>
-			<li>LI stands for list item</li>
+			<li class="customClass">LI stands for list item</li>
 			<li> replace UL with OL for an ordered list with numbers</li>
 			<li><a href="www.website.com>this is a clickable link</a></li>
 		<\ul>
