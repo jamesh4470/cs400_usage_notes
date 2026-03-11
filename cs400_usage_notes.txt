@@ -71,6 +71,12 @@ git merge frontend (do it while on main branch to merge)
 if you've fixed a merge conflict, commit your modified file to successfully merge
 remember to git push your merge onto remote
 
+<<<<<<< HEAD
+Your changes
+=======
+Incoming changes (from the branch being merged)
+>>>>>>> branch-name
+
 ==========================================================================================================================
 
 Makefile
