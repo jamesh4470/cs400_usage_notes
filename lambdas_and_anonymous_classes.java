@@ -5,33 +5,31 @@ interface MathOperation {
 }
 
 class AdditionOperation implements MathOperation {
-        @Override
-        public double compute(double a, double b) {
-                return a + b;
-        }
+    @Override
+    public double compute(double a, double b) {
+        return a + b;
+    }
 }
 
 public class CalculatorApp {
-
     public static MathOperation add() {
-            return new AdditionOperation();
+        return new AdditionOperation();
     }
 
     public static MathOperation mod() {
-            return new MathOperation() {
-                        @Override
-                        public double compute(double a, double b) {
-                                return a % b;
-                        }
-                };
+        return new MathOperation() {
+            @Override
+            public double compute(double a, double b) {
+                return a % b;
+            }
+        };
     }
 
     public static MathOperation compare() {
-
-            return (double a, double b) -> {
-                        if (a >= b) return 1;
-                        return 0;
-                };
+        return (double a, double b) -> {
+            if (a >= b) return 1;
+            return 0;
+        };
     }
 
     /**
