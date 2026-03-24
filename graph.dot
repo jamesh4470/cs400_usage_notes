@@ -1,0 +1,4 @@
+digraph my_graph {
+	"A" -> "B" [myCustomAttribute=30, label="shows up on edge"];
+	"A" -> "C" [myCustomAttribute=20, label="shows up on edge"];
+}
