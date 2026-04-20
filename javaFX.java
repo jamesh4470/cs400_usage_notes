@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 
 public class JavaFxApp extends Application {
     
@@ -20,8 +22,11 @@ public class JavaFxApp extends Application {
         Button button = new Button("my button");
 
         button.setLayoutY(25); // set y pos
+		
+		Circle circle = new Circle(200, 200, 20); // x, y, radius
+		Polygon triangle = new Polygon(100, 150, 180, 90, 35, 80); // 3 points
 
-        Group group = new Group(label, button);
+        Group group = new Group(label, button, circle, triangle);
         Scene scene = new Scene(group, 800, 600); // 800px wide, 600px high
 
         window.setScene(scene);

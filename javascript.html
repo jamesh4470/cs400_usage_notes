@@ -3,21 +3,33 @@
     <head>
         <title>Shortest Path Search</title>
         <meta name="author" content="Florian Heimerl" />
+        <!-- <script src="script.js"> for script in another file-->
         <script>
             function buttonClicked() {
                 console.log("button has been clicked");
-                document
-            }
+                let startLocation = document.querySelectorAll("#start")[0].value;
+				console.log("start location: " + startLocation);
+				let endLocation = document.querySelector("#end"); // expects only single element
+				console.log("end location: " + endLocation);
+			
+                // function handles and encodes special characters
+                fetch("http://ip/shortestPath?" + encodeURIComponent("start=" + startLocation + "&end=" + endLocation))
+                    .then((response) => response.text())
+                    .then((htmlFragment) => {
+                        document.querySelector("#results").innerHTML = htmlFragment;
+                    }); 
+			}
         </script>
     </head>
     <body>
         <h1>Shortest Path Search</h1>
         <label>start location:</label>
-        <input type="text" placeholder="start location" />
+        <input id="start" type="text" placeholder="start location" />
         <br /><br />
         <label>end location:</label>
-        <input type="text" placeholder="end location" />
+        <input id="end" type="text" placeholder="end location" />
         <br /><br />
         <input type="button" value="Start Search" onclick="buttonClicked()"/>
-    </body>
+		<div id="results"></div>
+	</body>
 </html>

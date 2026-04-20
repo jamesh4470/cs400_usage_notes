@@ -23,7 +23,33 @@ public class WebServer {
 				System.out.println("incoming request for: " + requestedFilePath);
 				
                 File readFile = new File(requestedFilePath.substring(1)); // substring(1) removes first character, the slash, from string
-                if (readFile.exists()) {
+                if (requestedFilePath.equals("/shortestPath")) {
+                    // url: ip:/shortestPath?start=startPoint&end=endPoint
+					String queryString = exchange.getRequestURI().getQuery();
+					String startLocation = null;
+					String endLocation = null;
+					for (String i : queryString.split("&")) {
+						if (i.startsWith("start=")) {
+                            startLocation = i.substring(6);
+                        }
+                        if (i.startsWith("end=")) {
+                            endLocation = i.substring(4);
+                        }
+                        System.out.println("start location: " + startLocation + "---" + "end location: " + endLocation);
+
+                        String placeholderResult = "<h3>Shortest path (placeholder server)</h3>" + 
+                                                    "<ul>" +
+                                                    "<li>" + startLocation + "</li>" +
+                                                    "<li>" + "placeholder server" + "</li>" +
+                                                    "<li>" + endLocation + "</li>" +
+                                                    "</ul>";
+                        exchange.getResponseHeaders().add("Content-type", "text/html");
+                        exchange.sendResponseHeaders(200, placeholderResult.length());
+                                                    
+                        OutputStream responseStream = exchange.getResponseBody();
+                        responseStream.close();
+					}
+				} else if (readFile.exists()) {
                     String contentType = "text/html";
                     if (requestedFilePath.endsWith(".css")) contentType = "text/css";
                     if (requestedFilePath.endsWith(".png")) contentType = "image/png";
