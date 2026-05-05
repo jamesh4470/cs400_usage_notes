@@ -49,7 +49,7 @@ public class JavaFxApp extends Application {
         bp.setAlignment(label, Pos.CENTER); // aligns label at center
         bp.setMargin(label, new Insets(5, 5, 5, 5)); // top right bottom left
         bp.setMargin(searchText, new Insets(5, 5, 5, 0)); 
-        // with event.consume(), no more propagating up to scene. 
+        // with event.consume(), no more propagating up to scene. propagation goes from smallest to largest.
         bp.addEventHandler(MouseEvent.MOUSE_CLICKED,
                           (event) -> {System.out.println("BorderPane clicked"); event.consume();});
         

@@ -148,7 +148,7 @@ If they don't exist, it will call their rules to make those files.
 			<li class="customClass">LI stands for list item</li>
 			<li> replace UL with OL for an ordered list with numbers</li>
 			<li><a href="www.website.com>this is a clickable link</a></li>
-		<\ul>
+		</ul>
 
         <input type="button" value="text on the button"/>
         <input type="text" placeholder="enter text here to the textbox/">
@@ -169,6 +169,13 @@ X (match for this specific character)
 [XY] (match for either of these characters)
 [\w-] (match either a word or a '-')
 ? (make the last match optional)
+^X (matches the beginning character with X)
+
+specifically:
+	[ab]: either a or b 
+	+: one or more repetitions
+	?: zero or one repetitions
+	* zero or more repetitions
 
 Example: 
 	A\d\d\.\w+
@@ -226,6 +233,7 @@ intermediate operation examples:
 		applies the function for every stream data
 		function takes input T, returns R
 		e.g. .map((item) -> item.toLowerCase()))
+		transforms elements, returns new stream
 	
 	.limit(int)
 		only allows at most int items
@@ -240,7 +248,8 @@ terminal operations:
 	.forEach(Consumer<T>)
 		Consumer has 1 void method
 		calls the method for each object that comes out of the stream
-	
+		consumes elements, returns nothing
+		
 	.count()
 		count the amount of items
 		
