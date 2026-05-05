@@ -6,6 +6,7 @@ java -jar junit5.jar -cp . -c classToBeTested
 
 in file:
 	import org.junit.jupiter.api.Test;
+	import org.junit.jupiter
 	
 	@Test
 	above the method to be tested
@@ -158,3 +159,136 @@ If they don't exist, it will call their rules to make those files.
 ==========================================================================================================================
 dot -Tsvg (format) -O (save to file) graph.dot
 ==========================================================================================================================
+REGEX
+
+X (match for this specific character)
+\d (digit)
+\. (dot)
+\w (word character)
++ (repeat the last match as many times as necessary)
+[XY] (match for either of these characters)
+[\w-] (match either a word or a '-')
+? (make the last match optional)
+
+Example: 
+	A\d\d\.\w+
+	all strings that start with A, then 2 digits, then dot, then any word characters
+	e.g. "A02.BashIntroduction"
+	
+	[AQP]\d\d\d?\.[\w-]+
+	all strings that start with A/Q/P, then 2 or 3 digits, then dot, then a word character or '-' as many times as necessary
+
+
+REGEX in bash
+
+grep -P "[\w\.]+@[\w\.]" text.txt 
+[-P]: specifies pearl version
+gives entire line by default, highlights matching parts in red
+add -o (only) to show only matching parts
+
+
+==========================================================================================================================
+STREAMS	
+
+requirements for stream: 
+	1. data source
+	2. chain of intermediate operations
+	3. one terminal operation
+	
+data source example: 
+
+	java.util.stream.Stream<T>
+		.generate(Supplier<T>)
+		Supplier<T> has one .get() method. 
+	
+		.of(T item, T item2, ...)
+		puts items into stream one by one
+	
+		.concat(stream1, stream2)
+	
+		.empty()
+		creates empty stream
+
+	java.util.Collection
+		.stream()
+
+	java.nio.file.Files.lines(path)
+	creates a new stream of String, puts lines of the text file into stream
+	
+intermediate operation examples:
+	.filter(Predicate<T>)
+		method of Stream type
+		predicate has 1 boolean method, if returns true, adds to output stream. if false, discard 
+		e.g. .filter((filter) -> item % 2 == 0)
+	
+	.map(Function<T, R>)
+		method of stream type
+		applies the function for every stream data
+		function takes input T, returns R
+		e.g. .map((item) -> item.toLowerCase()))
+	
+	.limit(int)
+		only allows at most int items
+	
+	.skip(int)
+		skip int amount of items
+
+terminal operations:
+	.findFirst()
+		returns first item of the stream
+	
+	.forEach(Consumer<T>)
+		Consumer has 1 void method
+		calls the method for each object that comes out of the stream
+	
+	.count()
+		count the amount of items
+		
+	.min/max(Comparator<T>)
+		find the min/max of stream
+	
+	.reduce(T, BinaryOperator<T>)
+		binaryoperator takes two inputs of type T and returns T
+		applies method to data of previous item and current item
+
+STREAMS IN BASH
+
+ls > "output.txt"
+    redirects the output of ls into output.txt
+    one file name each line
+
+
+ls >> output.txt
+    if file already exists, add to output.txt instead of replacing it
+
+
+wc results.txt
+    outputs 3 numbers:
+        1. line count
+        2. word count
+        3. character count
+    with -l flag, outputs only the line number
+
+
+sort output.txt
+    sorts lexographically
+    -r flag reverses sort order
+
+
+head -n2 output.txt
+    prints first 2 lines of the file
+
+
+tail -n3 output.txt
+    prints last 3 lines of the file
+
+
+sort -r output.txt | grep -P "\.java"
+    pipes sort's standard output to grep's standard input 
+
+examples: 
+    ls | sort -r | grep -P "\.java" | head -n2
+        prints to stdout
+    ls | sort -r | grep -P "\.java" | head -n2 > results.txt
+        redirects stdout to results.txt
+
